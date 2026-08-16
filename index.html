@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comet Arcade</title>
+  <link class="arcade-favicon" rel="icon" href="site-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Complete neutralization of old icon properties (backgrounds, masks, sprites) */
+    .mini-icon, .game-icon, 
+    .poker-icon, .space-icon, .life-icon {
+      background-image: none !important;
+      background: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      mask: none !important;
+      -webkit-mask: none !important;
+    }
+    
+    /* Disable pseudo-elements which might carry sprites or legacy icon assets */
+    .mini-icon::before, .mini-icon::after,
+    .game-icon::before, .game-icon::after,
+    .poker-icon::before, .poker-icon::after,
+    .space-icon::before, .space-icon::after,
+    .life-icon::before, .life-icon::after {
+      content: none !important;
+      background-image: none !important;
+      background: none !important;
+      display: none !important;
+      mask: none !important;
+      -webkit-mask: none !important;
+    }
+
+    /* Scaling behavior for the custom SVGs to fit existing layouts */
+    .mini-icon svg, .game-icon svg {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      display: block !important;
+    }
+
+    /* Cohesive glow and neon tint parameters to suit each game */
+    [data-open-game="royal-poker"] .mini-icon, [data-open-game="royal-poker"] .game-icon { color: #f5cba7; filter: drop-shadow(0 0 5px rgba(245, 203, 167, 0.6)); }
+    [data-open-game="sky-islands"] .mini-icon, [data-open-game="sky-islands"] .game-icon { color: #38bdf8; filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.6)); }
+    [data-open-game="holdem-hockey"] .mini-icon, [data-open-game="holdem-hockey"] .game-icon { color: #20bf6b; filter: drop-shadow(0 0 5px rgba(32, 191, 107, 0.6)); }
+    [data-open-game="tetris"] .mini-icon, [data-open-game="tetris"] .game-icon { color: #d4af37; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6)); }
+    [data-open-game="ping-pong"] .mini-icon, [data-open-game="ping-pong"] .game-icon { color: #eb3b5a; filter: drop-shadow(0 0 5px rgba(235, 59, 90, 0.6)); }
+    [data-open-game="kong"] .mini-icon, [data-open-game="kong"] .game-icon { color: #f59e0b; filter: drop-shadow(0 0 5px rgba(245, 158, 11, 0.6)); }
+    [data-open-game="quartet"] .mini-icon, [data-open-game="quartet"] .game-icon { color: #f0d080; filter: drop-shadow(0 0 5px rgba(240, 208, 128, 0.6)); }
+    [data-open-game="vaporwave-clicker"] .mini-icon, [data-open-game="vaporwave-clicker"] .game-icon { color: #ff007f; filter: drop-shadow(0 0 5px rgba(255, 0, 127, 0.6)); }
+    [data-open-game="poker-snake"] .mini-icon, [data-open-game="poker-snake"] .game-icon { color: #10b981; filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.6)); }
+  </style>
+</head>
+<body>
+<div id="game-platform">
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Comet Arcade home">
+      <span class="brand-mark">C</span>
+      <span>Comet Arcade</span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#featured">Featured</a>
+      <a href="#games">Games</a>
+      <a href="#play">Play</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" id="featured">
+      <div class="hero-copy">
+        <p class="eyebrow">Browser games hub</p>
+        <h1>Play quick games in one place.</h1>
+        <p>Enjoy card games, vertical climbers, physical air hockey, and vintage retro clickers directly in your browser.</p>
+        <a class="primary cta" href="#games">Browse Games</a>
+      </div>
+      <!-- Featured game set to Retro Vaporwave Clicker -->
+      <button class="featured-game" type="button" data-open-game="vaporwave-clicker">
+        <span class="badge">Featured</span>
+        <span class="game-art space-art" aria-hidden="true">
+          <span class="game-icon space-icon">
+            <!-- Vaporwave sunset landscape -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z" fill="currentColor" fill-opacity="0.15" />
+              <path d="M2 12h20M4 15h18M6 18h12M9 21h6" />
+            </svg>
+          </span>
+        </span>
+        <strong>Retro Vaporwave Clicker</strong>
+        <small>Synthesize core credits, upgrade computing drives, and harvest cabinet relics.</small>
+      </button>
+    </section>
+
+    <section class="home-icons" aria-label="Quick game icons">
+      <button class="home-icon-card" type="button" data-open-game="royal-poker">
+        <span class="mini-icon poker-icon">
+          <!-- Overlapping Card Deck -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7.5 18L3 13.5l5.5-5.5L13 12.5z" />
+            <path d="M11 16.5l4.5-4.5 5.5 5.5L16.5 22z" fill="currentColor" fill-opacity="0.2" />
+            <path d="M16.5 7.5L12 3 6.5 8.5l4.5 4.5z" />
+          </svg>
+        </span>
+        <strong>Poker</strong>
+      </button>
+      <button class="home-icon-card" type="button" data-open-game="sky-islands">
+        <span class="mini-icon space-icon">
+          <!-- Cloud with Jump Arrow -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42 0-.81.07-1.18.18A5 5 0 0 0 5 13c0 2.2 1.8 4 4 4" />
+            <path d="M12 5v10M9 8l3-3 3 3" />
+          </svg>
+        </span>
+        <strong>Jump</strong>
+      </button>
+      <button class="home-icon-card" type="button" data-open-game="holdem-hockey">
+        <span class="mini-icon life-icon">
+          <!-- Air Hockey Mallet and Puck -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3" />
+            <path d="M7 14h10v2a3 3 0 0 1-10 0v-2z" />
+            <path d="M12 8v6" />
+            <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+          </svg>
+        </span>
+        <strong>Hockey</strong>
+      </button>
+      <!-- Tetris Quick Link -->
+      <button class="home-icon-card" type="button" data-open-game="tetris">
+        <span class="mini-icon poker-icon">
+          <!-- Falling Tetris Blocks -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="16" width="6" height="6" rx="1" />
+            <rect x="8" y="16" width="6" height="6" rx="1" />
+            <rect x="14" y="16" width="6" height="6" rx="1" />
+            <rect x="8" y="10" width="6" height="6" rx="1" fill="currentColor" fill-opacity="0.3" />
+            <rect x="14" y="4" width="6" height="6" rx="1" />
+          </svg>
+        </span>
+        <strong>Tetris</strong>
+      </button>
+      <!-- Pong Quick Link -->
+      <button class="home-icon-card" type="button" data-open-game="ping-pong">
+        <span class="mini-icon life-icon">
+          <!-- Pong Paddles and Ball -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="2" height="10" rx="1" fill="currentColor" />
+            <rect x="19" y="7" width="2" height="10" rx="1" fill="currentColor" />
+            <circle cx="11" cy="12" r="2.5" fill="currentColor" />
+            <path d="M6 10l5 2 5-2" stroke-dasharray="3 3" />
+          </svg>
+        </span>
+        <strong>Pong</strong>
+      </button>
+      <!-- Pit Boss Quick Link -->
+      <button class="home-icon-card" type="button" data-open-game="kong">
+        <span class="mini-icon space-icon">
+          <!-- Platformer Cowboy Hat -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18c2-2 5-3 9-3s7 1 9 3" />
+            <path d="M8 15V8a4 4 0 0 1 8 0v7" />
+            <path d="M5 21h14M9 18h6M12 15V21" stroke-width="1.5" />
+          </svg>
+        </span>
+        <strong>Boss</strong>
+      </button>
+      <!-- Table Quartet Quick Link -->
+      <button class="home-icon-card" type="button" data-open-game="quartet">
+        <span class="mini-icon poker-icon">
+          <!-- 4-Quadrant Parlor Grid -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+            <rect x="3" y="14" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+        </span>
+        <strong>Quartet</strong>
+      </button>
+      <!-- Poker Snake Quick Link -->
+      <button class="home-icon-card" type="button" data-open-game="poker-snake">
+        <span class="mini-icon poker-icon">
+          <!-- Wavy Snake Path with Cards Background -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.15" />
+            <path d="M7 17V13c0-1.1.9-2 2-2h6c1.1 0 2-.9 2-2V7" />
+            <circle cx="7" cy="17" r="1" fill="currentColor" />
+            <circle cx="17" cy="7" r="1" fill="currentColor" />
+          </svg>
+        </span>
+        <strong>Snake</strong>
+      </button>
+    </section>
+
+    <section class="category-strip" aria-label="Game categories">
+      <button class="chip active" type="button" data-filter="all">All</button>
+      <button class="chip" type="button" data-filter="cards">Cards</button>
+      <button class="chip" type="button" data-filter="arcade">Arcade</button>
+      <button class="chip" type="button" data-filter="clicker">Clicker</button>
+    </section>
+
+    <section class="catalog" id="games" aria-labelledby="games-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Game library</p>
+          <h2 id="games-title">Choose a game</h2>
+        </div>
+        <label class="search-label">
+          <span>Search</span>
+          <input id="game-search" type="search" placeholder="poker, jump, hockey, clicker, tetris, pong, boss, quartet, snake">
+        </label>
+      </div>
+      <div class="game-grid" id="game-grid">
+        <!-- Royal Flush Poker -->
+        <button class="game-card" type="button" data-open-game="royal-poker" data-tags="cards poker casino">
+          <span class="game-art poker-art" aria-hidden="true">
+            <span class="game-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.5 18L3 13.5l5.5-5.5L13 12.5z" />
+                <path d="M11 16.5l4.5-4.5 5.5 5.5L16.5 22z" fill="currentColor" fill-opacity="0.2" />
+                <path d="M16.5 7.5L12 3 6.5 8.5l4.5 4.5z" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Royal Flush Poker</strong>
+          <small>Full Texas Hold'em table with bots and betting.</small>
+        </button>
+        <!-- Sky Islands Jump -->
+        <button class="game-card" type="button" data-open-game="sky-islands" data-tags="arcade jump sky cozy">
+          <span class="game-art space-art" aria-hidden="true">
+            <span class="game-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42 0-.81.07-1.18.18A5 5 0 0 0 5 13c0 2.2 1.8 4 4 4" />
+                <path d="M12 5v10M9 8l3-3 3 3" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Sky Islands Jump</strong>
+          <small>Bounce between floating islands and climb as high as you can.</small>
+        </button>
+        <!-- Hold'em Table Air Hockey -->
+        <button class="game-card" type="button" data-open-game="holdem-hockey" data-tags="arcade hockey poker casino">
+          <span class="game-art life-art" aria-hidden="true">
+            <span class="game-icon life-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3" />
+                <path d="M7 14h10v2a3 3 0 0 1-10 0v-2z" />
+                <path d="M12 8v6" />
+                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Hold'em Table</strong>
+          <small>Casino-themed air hockey with customizable stakes.</small>
+        </button>
+        <!-- Texas Hold 'em Tetris -->
+        <button class="game-card" type="button" data-open-game="tetris" data-tags="arcade cards tetris casino">
+          <span class="game-art poker-art" aria-hidden="true">
+            <span class="game-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="16" width="6" height="6" rx="1" />
+                <rect x="8" y="16" width="6" height="6" rx="1" />
+                <rect x="14" y="16" width="6" height="6" rx="1" />
+                <rect x="8" y="10" width="6" height="6" rx="1" fill="currentColor" fill-opacity="0.3" />
+                <rect x="14" y="4" width="6" height="6" rx="1" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Texas Hold 'em Tetris</strong>
+          <small>Complete lines of falling cards to deal and score winning poker hands.</small>
+        </button>
+        <!-- Texas Showdown Pong -->
+        <button class="game-card" type="button" data-open-game="ping-pong" data-tags="arcade cards pong casino">
+          <span class="game-art life-art" aria-hidden="true">
+            <span class="game-icon life-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7" width="2" height="10" rx="1" fill="currentColor" />
+                <rect x="19" y="7" width="2" height="10" rx="1" fill="currentColor" />
+                <circle cx="11" cy="12" r="2.5" fill="currentColor" />
+                <path d="M6 10l5 2 5-2" stroke-dasharray="3 3" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Texas Showdown Pong</strong>
+          <small>Paddle tennis meets high-stakes poker in an 80s arcade classic.</small>
+        </button>
+        <!-- Texas Pit Boss -->
+        <button class="game-card" type="button" data-open-game="kong" data-tags="arcade cards platformer casino">
+          <span class="game-art space-art" aria-hidden="true">
+            <span class="game-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18c2-2 5-3 9-3s7 1 9 3" />
+                <path d="M8 15V8a4 4 0 0 1 8 0v7" />
+                <path d="M5 21h14M9 18h6M12 15V21" stroke-width="1.5" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Texas Pit Boss</strong>
+          <small>Climb procedural platforms and dodge aimed chips to break the vault.</small>
+        </button>
+        <!-- Texas Table Quartet -->
+        <button class="game-card" type="button" data-open-game="quartet" data-tags="arcade cards quartet board casino">
+          <span class="game-art poker-art" aria-hidden="true">
+            <span class="game-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+                <rect x="3" y="14" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Texas Table Quartet</strong>
+          <small>A 4-in-1 saloon parlor with Tic-Tac-Toe, Sort, Match-3, and Connect-4.</small>
+        </button>
+        <!-- Retro Vaporwave Clicker (Fully Unlocked & Playable) -->
+        <button class="game-card" type="button" data-open-game="vaporwave-clicker" data-tags="arcade clicker vaporwave retro">
+          <span class="game-art space-art" aria-hidden="true">
+            <span class="game-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z" fill="currentColor" fill-opacity="0.15" />
+                <path d="M2 12h20M4 15h18M6 18h12M9 21h6" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Retro Clicker</strong>
+          <small>Classic vaporwave synthesizer and cabinet relics.</small>
+        </button>
+        <!-- Poker Snake (Dynamic Addition) -->
+        <button class="game-card" type="button" data-open-game="poker-snake" data-tags="arcade cards snake casino">
+          <span class="game-art poker-art" aria-hidden="true">
+            <span class="game-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.15" />
+                <path d="M7 17V13c0-1.1.9-2 2-2h6c1.1 0 2-.9 2-2V7" />
+                <circle cx="7" cy="17" r="1" fill="currentColor" />
+                <circle cx="17" cy="7" r="1" fill="currentColor" />
+              </svg>
+            </span>
+          </span>
+          <span class="badge">Playable</span>
+          <strong>Poker Snake</strong>
+          <small>Steer your dealer snake, eat cards, and construct winning poker hands.</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="play-area" id="play" aria-labelledby="play-title">
+      <div class="player-shell">
+        <div class="player-main">
+          <div class="player-toolbar">
+            <button class="secondary" id="back-home" type="button">Home</button>
+            <div>
+              <p class="eyebrow">Now playing</p>
+              <h2 id="play-title">Choose a game</h2>
+            </div>
+            <button class="primary" id="fullscreen-game" type="button">Fullscreen</button>
+          </div>
+          <div class="game-frame-wrap" id="game-frame-wrap">
+            <iframe id="game-frame" title="Game player" src="about:blank" allowfullscreen></iframe>
+            <div class="empty-player" id="empty-player">
+              <span class="mini-icon space-icon"></span>
+              <strong>Pick a game to start playing.</strong>
+            </div>
+          </div>
+        </div>
+
+        <aside class="trending-panel" aria-labelledby="trending-title">
+          <p class="eyebrow">Trending</p>
+          <h2 id="trending-title">Games</h2>
+          <button class="trend-card" type="button" data-open-game="poker-snake">
+            <span class="mini-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor" fill-opacity="0.15" />
+                <path d="M7 17V13c0-1.1.9-2 2-2h6c1.1 0 2-.9 2-2V7" />
+                <circle cx="7" cy="17" r="1" fill="currentColor" />
+                <circle cx="17" cy="7" r="1" fill="currentColor" />
+              </svg>
+            </span>
+            <span><strong>Poker Snake</strong><small>Poker hand snake game</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="quartet">
+            <span class="mini-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+                <rect x="3" y="14" width="7" height="7" rx="1" fill="currentColor" fill-opacity="0.25" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </span>
+            <span><strong>Table Quartet</strong><small>4-in-1 saloon hub</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="kong">
+            <span class="mini-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 18c2-2 5-3 9-3s7 1 9 3" />
+                <path d="M8 15V8a4 4 0 0 1 8 0v7" />
+                <path d="M5 21h14M9 18h6M12 15V21" stroke-width="1.5" />
+              </svg>
+            </span>
+            <span><strong>Texas Pit Boss</strong><small>30-stage climber</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="ping-pong">
+            <span class="mini-icon life-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="7" width="2" height="10" rx="1" fill="currentColor" />
+                <rect x="19" y="7" width="2" height="10" rx="1" fill="currentColor" />
+                <circle cx="11" cy="12" r="2.5" fill="currentColor" />
+                <path d="M6 10l5 2 5-2" stroke-dasharray="3 3" />
+              </svg>
+            </span>
+            <span><strong>Showdown Pong</strong><small>80s arcade classic</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="tetris">
+            <span class="mini-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="16" width="6" height="6" rx="1" />
+                <rect x="8" y="16" width="6" height="6" rx="1" />
+                <rect x="14" y="16" width="6" height="6" rx="1" />
+                <rect x="8" y="10" width="6" height="6" rx="1" fill="currentColor" fill-opacity="0.3" />
+                <rect x="14" y="4" width="6" height="6" rx="1" />
+              </svg>
+            </span>
+            <span><strong>Hold'em Tetris</strong><small>Poker line puzzle</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="vaporwave-clicker">
+            <span class="mini-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a10 10 0 0 1 10 10H2A10 10 0 0 1 12 2z" fill="currentColor" fill-opacity="0.15" />
+                <path d="M2 12h20M4 15h18M6 18h12M9 21h6" />
+              </svg>
+            </span>
+            <span><strong>Retro Clicker</strong><small>Vintage clicker</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="holdem-hockey">
+            <span class="mini-icon life-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="3" />
+                <path d="M7 14h10v2a3 3 0 0 1-10 0v-2z" />
+                <path d="M12 8v6" />
+                <circle cx="12" cy="19" r="1.5" fill="currentColor" />
+              </svg>
+            </span>
+            <span><strong>Hold'em Table</strong><small>Casino air hockey</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="sky-islands">
+            <span class="mini-icon space-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42 0-.81.07-1.18.18A5 5 0 0 0 5 13c0 2.2 1.8 4 4 4" />
+                <path d="M12 5v10M9 8l3-3 3 3" />
+              </svg>
+            </span>
+            <span><strong>Sky Islands Jump</strong><small>Vertical climber</small></span>
+          </button>
+          <button class="trend-card" type="button" data-open-game="royal-poker">
+            <span class="mini-icon poker-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.5 18L3 13.5l5.5-5.5L13 12.5z" />
+                <path d="M11 16.5l4.5-4.5 5.5 5.5L16.5 22z" fill="currentColor" fill-opacity="0.2" />
+                <path d="M16.5 7.5L12 3 6.5 8.5l4.5 4.5z" />
+              </svg>
+            </span>
+            <span><strong>Royal Flush Poker</strong><small>Texas Hold'em</small></span>
+          </button>
+        </aside>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="app.js"></script>
+
+<!-- Script to bypass app.js unknown-game alerts for custom uploads -->
+<script>
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('[data-open-game]');
+  if (card) {
+    const gameId = card.getAttribute('data-open-game');
+    
+    // Maps game IDs to their actual filenames
+    const customGames = {
+      'sky-islands': 'sky-islands.html',
+      'holdem-hockey': 'holdem-hockey.html',
+      'vaporwave-clicker': 'vaporwave-clicker.html',
+      'tetris': 'tetris.html',
+      'ping-pong': 'ping pong.html',
+      'kong': 'kong.html',
+      'quartet': 'quartet.html',
+      'poker-snake': 'Snake.html'
+    };
+    
+    if (customGames[gameId]) {
+      // Prevents app.js from triggering the "future upload" alert popup
+      e.stopImmediatePropagation();
+      
+      const gameFrame = document.getElementById('game-frame');
+      const emptyPlayer = document.getElementById('empty-player');
+      const playTitle = document.getElementById('play-title');
+      
+      if (gameFrame) {
+        gameFrame.src = customGames[gameId];
+        if (emptyPlayer) emptyPlayer.style.display = 'none';
+        if (playTitle) {
+          const strong = card.querySelector('strong');
+          playTitle.textContent = strong ? strong.textContent : 'Game';
+        }
+        
+        // Smoothly scroll down to the viewport play section
+        const playSection = document.getElementById('play');
+        if (playSection) {
+          playSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }
+}, true); // Use capturing phase to handle click actions before app.js intercepts them
+</script>
+
+</body>
+</html>
